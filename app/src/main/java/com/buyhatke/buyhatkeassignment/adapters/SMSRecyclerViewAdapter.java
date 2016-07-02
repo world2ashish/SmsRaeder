@@ -11,13 +11,15 @@ import android.widget.TextView;
 import com.buyhatke.buyhatkeassignment.R;
 import com.buyhatke.buyhatkeassignment.interfaces.SmsRowClickListener;
 
+import java.util.ArrayList;
+
 /**
  * Created by ashishgupta on 02/07/16.
  */
 public class SMSRecyclerViewAdapter extends RecyclerView.Adapter<SMSRecyclerViewAdapter.SmsViewHolder> {
     private final Context mContext;
     private final SmsRowClickListener smsRowClickListener;
-    private String[] smsSendersArray;
+    private ArrayList<String> smsSendersArray;
 
     public SMSRecyclerViewAdapter(Context mContext, SmsRowClickListener smsRowClickListener) {
         this.smsRowClickListener = smsRowClickListener;
@@ -32,7 +34,7 @@ public class SMSRecyclerViewAdapter extends RecyclerView.Adapter<SMSRecyclerView
 
     @Override
     public void onBindViewHolder(final SmsViewHolder holder, int position) {
-        final String smsSender = smsSendersArray[holder.getAdapterPosition()];
+        final String smsSender = smsSendersArray.get(holder.getAdapterPosition());
         if (smsSender != null) {
             holder.smsRowRelativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -51,10 +53,10 @@ public class SMSRecyclerViewAdapter extends RecyclerView.Adapter<SMSRecyclerView
 
     @Override
     public int getItemCount() {
-        return smsSendersArray != null ? smsSendersArray.length : 0;
+        return smsSendersArray != null ? smsSendersArray.size() : 0;
     }
 
-    public void setSmsSendersArr(String[] smsSendersArray) {
+    public void setSmsSendersArr(ArrayList<String> smsSendersArray) {
         this.smsSendersArray = smsSendersArray;
     }
 

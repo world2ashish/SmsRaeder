@@ -140,17 +140,16 @@ public class Utility {
         return null;
     }
 
-    public static String[] getAllSendersList(Context mContext) {
+    public static ArrayList<String> getAllSendersList(Context mContext) {
         ArrayList<SmsModel> allSms = getAllSmsList(mContext);
         if (allSms != null) {
             HashSet<String> sendersSet = new HashSet<>();
             for (SmsModel s : allSms) {
                 sendersSet.add(s.getAddress());
             }
-            String[] sendersArr = new String[sendersSet.size()];
-            int count = 0;
+            ArrayList<String> sendersArr = new ArrayList<>();
             for (String s : sendersSet) {
-                sendersArr[count++] = s;
+                sendersArr.add(s);
             }
             sendersSet = null;
             return sendersArr;
