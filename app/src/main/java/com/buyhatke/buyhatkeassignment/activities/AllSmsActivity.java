@@ -2,16 +2,14 @@ package com.buyhatke.buyhatkeassignment.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.EditText;
 
 import com.buyhatke.buyhatkeassignment.R;
@@ -39,6 +37,10 @@ public class AllSmsActivity extends AppCompatActivity implements SmsListener {
         this.mContext = AllSmsActivity.this;
         initViews();
 
+        populateSms();
+    }
+
+    private void populateSms() {
         boolean isPermissionGranted = PermissionHandler.checkPermission(mContext,
                 Constants.SMS_PERMISSIONS,
                 Constants.SMS_PERMISSION_CODE);
@@ -50,15 +52,6 @@ public class AllSmsActivity extends AppCompatActivity implements SmsListener {
     private void initViews() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         EditText searchEdittext = (EditText) findViewById(R.id.search_edittext);
         if (searchEdittext != null) {
@@ -130,5 +123,22 @@ public class AllSmsActivity extends AppCompatActivity implements SmsListener {
     public void onSmsReadComplete() {
         smsAdapter.setSmsSendersArr(Utility.getAllSendersList(mContext));
         smsAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case Constants.SMS_PERMISSION_CODE: {
+                boolean permissionsGranted = true;
+                for (int g : grantResults) {
+                    if (g != PackageManager.PERMISSION_GRANTED) {
+                        permissionsGranted = false;
+                    }
+                }
+                if (permissionsGranted) {
+                    populateSms();
+                }
+            }
+        }
     }
 }
