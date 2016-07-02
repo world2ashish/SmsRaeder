@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import com.buyhatke.buyhatkeassignment.models.SmsModel;
 import com.google.gson.Gson;
@@ -155,5 +157,18 @@ public class Utility {
             return sendersArr;
         }
         return null;
+    }
+
+    public static void sendMessage(Context context, String smsAddress, String message) {
+        if (smsAddress == null || message == null) {
+            return;
+        }
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(smsAddress, null, message, null, null);
+            Toast.makeText(context, "Sms sent", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(context, "Sms failed", Toast.LENGTH_SHORT).show();
+        }
     }
 }

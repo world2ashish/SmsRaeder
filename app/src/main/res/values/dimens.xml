@@ -7,4 +7,7 @@
     <dimen name="d100">100dp</dimen>
     <dimen name="f16">16sp</dimen>
     <dimen name="d10">10dp</dimen>
+    <dimen name="d50">50dp</dimen>
+    <dimen name="d200">200dp</dimen>
+    <dimen name="d260">260dp</dimen>
 </resources>

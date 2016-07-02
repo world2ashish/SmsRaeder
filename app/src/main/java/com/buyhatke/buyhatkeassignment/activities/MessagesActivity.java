@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.buyhatke.buyhatkeassignment.R;
 import com.buyhatke.buyhatkeassignment.adapters.MessageRecyclerViewAdapter;
@@ -14,11 +16,12 @@ import com.buyhatke.buyhatkeassignment.utils.Utility;
 /**
  * Created by ashishgupta on 02/07/16.
  */
-public class MessagesActivity extends AppCompatActivity {
+public class MessagesActivity extends AppCompatActivity implements View.OnClickListener {
 
     private MessagesActivity mContext;
     private MessageRecyclerViewAdapter messagesAdapter;
     private String smsAddress;
+    private EditText messageEdittext;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,8 +42,23 @@ public class MessagesActivity extends AppCompatActivity {
             messagesRecyclerView.setHasFixedSize(true);
             LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
             messagesRecyclerView.setLayoutManager(layoutManager);
-            messagesAdapter = new MessageRecyclerViewAdapter(mContext, Utility.getMessagesForOneAddress(mContext,smsAddress));
+            messagesAdapter = new MessageRecyclerViewAdapter(mContext, Utility.getMessagesForOneAddress(mContext, smsAddress));
             messagesRecyclerView.setAdapter(messagesAdapter);
+        }
+
+        messageEdittext = (EditText) findViewById(R.id.send_message_text);
+        Button sendButton = (Button) findViewById(R.id.send_message_btn);
+        if (sendButton != null) {
+            sendButton.setOnClickListener(this);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.send_message_btn:
+                Utility.sendMessage(mContext, smsAddress, messageEdittext.getText().toString());
+                break;
         }
     }
 }
