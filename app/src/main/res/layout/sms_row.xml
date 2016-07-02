@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sms_row_relative_layout"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/d100"
+    android:padding="@dimen/d20">
+
+    <TextView
+        android:id="@+id/sms_sender_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="kadadn"
+        android:textSize="@dimen/f16"
+        android:textStyle="bold" />
+</RelativeLayout>
