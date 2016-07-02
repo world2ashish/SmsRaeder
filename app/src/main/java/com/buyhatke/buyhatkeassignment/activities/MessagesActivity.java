@@ -34,9 +34,6 @@ public class MessagesActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-
         RecyclerView messagesRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         if (messagesRecyclerView != null) {
             messagesRecyclerView.setHasFixedSize(true);

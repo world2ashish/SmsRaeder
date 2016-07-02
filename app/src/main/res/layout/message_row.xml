@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/sms_row_relative_layout"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/d100"
+    android:minHeight="@dimen/d100"
+    android:layout_height="wrap_content"
     android:padding="@dimen/d20">
 
     <TextView

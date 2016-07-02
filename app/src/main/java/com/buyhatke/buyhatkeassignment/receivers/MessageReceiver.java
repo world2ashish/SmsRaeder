@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 
+import com.buyhatke.buyhatkeassignment.utils.NotificationHandler;
+
 /**
  * Created by ashishgupta on 02/07/16.
  */
@@ -18,6 +20,9 @@ public class MessageReceiver extends BroadcastReceiver {
         String code = "";
 
         if (bundle != null) {
+
+            NotificationHandler.showNotification(context);
+
             final Object[] pdusObj = (Object[]) bundle.get("pdus");
 
             if (pdusObj != null) {
